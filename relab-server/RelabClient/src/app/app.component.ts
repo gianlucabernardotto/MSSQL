@@ -43,7 +43,9 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-   this.obsCiVett = this.http.get<Ci_vettore[]>("https://3000-ac065d1b-37ae-4340-a510-3493e44eacfd.ws-eu01.gitpod.io/ci_vettore/90");
+    this.obsGeoData = this.http.get<GeoFeatureCollection>("https://3000-e4a6cedb-2f8a-4bca-be3e-93cb6aa06d43.ws-eu01.gitpod.io/");
+    this.obsGeoData.subscribe(this.prepareData);
+    this.obsCiVett = this.http.get<Ci_vettore[]>("https://3000-ac065d1b-37ae-4340-a510-3493e44eacfd.ws-eu01.gitpod.io/ci_vettore/90");
     this.obsCiVett.subscribe(this.prepareCiVettData);
   }
 
