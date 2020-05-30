@@ -17,15 +17,19 @@ module.exports = class CoordConverter {
 
         let i = 0;
         for (const record of recordset) {  
-            let polygonGeometry = parse(record[""]); //parso da wkt a geojson geometry
-            let geom = this._convertPolygon(polygonGeometry); // converto in "EPSG:4362" 
-            // e metto la geometry  geojson
-            geoJsonHeader.features.push(new Feature(i,geom));
+            let media = record["media"];
+            let somma = record["somma"];
+            let polygonGeometry = parse(record["WKT"]); 
+            let geom = (polygonGeometry); 
+ 
+            geoJsonHeader.features.push(new Feature(i,geom, media, somma));
+            i++;
         }
         return geoJsonHeader;
     }
 
-    //Converte una geometry coordinata per coordinata con proj4
+
+    
     _convertPolygon(geometry) {
         let polygon = geometry.coordinates[0];
         for (let index = 0; index < polygon.length; index++) {
